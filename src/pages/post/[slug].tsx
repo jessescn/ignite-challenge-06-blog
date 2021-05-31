@@ -12,6 +12,7 @@ import { FiUser, FiCalendar, FiClock } from 'react-icons/fi'
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import { useRouter } from 'next/router';
 
 interface Post {
   first_publication_date: string | null;
@@ -38,6 +39,8 @@ export default function Post({ post }: PostProps) {
 
   const { data } = post
 
+  const router = useRouter();
+
   let total = 0
 
   for(let i = 0; i < data.content.length; i++){
@@ -52,7 +55,7 @@ export default function Post({ post }: PostProps) {
   
   const minutes = Math.ceil(total/200)
 
-  if (!post){
+  if (router.isFallback){
     return (
       <h2>Carregando...</h2>
     )
@@ -122,9 +125,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   
   const prismic = getPrismicClient();
   const response = await prismic.getByUID('post', String(slug), {});
-
-  console.log(response);
-  
 
   const post = {
     uid: response.uid,
