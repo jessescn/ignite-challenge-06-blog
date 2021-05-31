@@ -1,1 +1,45 @@
-// TODO
+.container {
+  max-width: 43.75rem;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  span {
+
+    font-size: 0.9rem;
+
+    & +span {
+      margin-left: 1rem;
+    }
+
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.imageContainer {
+  height: 25rem;
+  width: 100%;
+  overflow: hidden;
+  
+  margin-bottom: 5rem;
+}
+
+.content {
+
+  > div {
+    margin: 2rem 0;
+
+    h2 {
+      font-size: 2rem;
+    }
+    
+    p {
+      margin: 1rem 0;
+    }
+  }
+}

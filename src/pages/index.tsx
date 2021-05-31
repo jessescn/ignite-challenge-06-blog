@@ -17,7 +17,6 @@ import { useState } from 'react';
 
 interface Post {
   uid?: string;
-  slug: string;
   first_publication_date: string | null;
   data: {
     title: string;
@@ -56,7 +55,6 @@ export default function Home({ postsPagination }: HomeProps) {
         
         const post: Post  = {
           uid: result.uid,
-          slug: result.slug,
           first_publication_date: result.first_publication_date,
           data: {
             title: result.data.title,
@@ -72,10 +70,15 @@ export default function Home({ postsPagination }: HomeProps) {
 
   return(
     <div className={styles.container}>
+      <header className={commonStyles.header}>
+        <Link href="/">
+          <img src="/logo.svg" alt="logo" />
+        </Link>
+      </header>
       <div>
         {
           posts.map(post => (
-            <Link key={post.uid} href={`/post/${post.slug}`}>
+            <Link key={post.uid} href={`/post/${post.uid}`}>
               <div className={styles.post}>
                 <h3>{post.data.title}</h3>
                 <p>{post.data.subtitle}</p>
@@ -101,9 +104,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const results = res.results.map(result => {
 
+  
     return {
       uid: result.uid,
-      slug: result.slugs[0],
       first_publication_date: result.first_publication_date,
       data: {
         title: result.data.title,
